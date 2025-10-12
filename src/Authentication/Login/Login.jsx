@@ -1,8 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import GoogleSignIn from "../../Shared/GoogleSignIn/GoogleSignIn";
+import { useForm } from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+  const {logInUser} = useAuth();
+  const {register, handleSubmit, formState:{errors}} = useForm()
+
+  const onSubmit = data  =>{
+    logInUser(data.email, data.password)
+    .then((result)=>{
+      const user = result.user
+      console.log('user in log in user function', user)
+    })
+    .catch(err =>{
+      console.error('error in logInUser function ', err)
+    })
+  }
   return (
     <section className="flex items-center justify-center min-h-screen bg-gray-50 shadow-2xl px-6 py-12 rounded-lg">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 md:p-10">
@@ -12,7 +27,7 @@ const Login = () => {
         </h2>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">
@@ -20,10 +35,12 @@ const Login = () => {
             </label>
             <input
               type="email"
+              {...register('email',{required: true})}
               name="email"
               placeholder="Enter your email"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border text-black border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
+            {errors.email?.type === 'required' && <p className="text-red-500">email must required</p>}
           </div>
 
           {/* Password */}
@@ -33,10 +50,13 @@ const Login = () => {
             </label>
             <input
               type="password"
+              {...register('password',{required: true, minLength: 6})}
               name="password"
               placeholder="Enter your password"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border text-black border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
+            {errors.password?.type === 'required' && <p className="text-red-500">password must required</p>}
+            {errors.password?.type === 'minLength' && <p className="text-red-500">password must 6 charecter</p>}
           </div>
 
           {/* Register Link */}
