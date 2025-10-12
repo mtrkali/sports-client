@@ -12,7 +12,6 @@ const Home = () => {
             <About></About>
             <LocationSection></LocationSection>
             <PromotionsSection></PromotionsSection>
-            <Footer></Footer>
         </div>
     );
 };

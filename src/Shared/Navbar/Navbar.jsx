@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from '../../assets/logo.png'
+import { Link, NavLink } from "react-router-dom";
+import Logo from "../logo/Logo";
+import { AuthContext } from "../../Contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     const isLoggedIn = false; // change to true to show Profile
-    const [user, setUser] = useState({ name: "name", email: 'email.com' })
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                console.log('logout successfull')
+            }).catch(err => {
+                console.error('error in logout function', err)
+            })
+    }
 
     return (
         <nav className="bg-gray-800 text-white px-2 md:px-6 lg:px-6 py-4">
             <div className="flex justify-between items-center">
-                {/* Logo + Site Name */}
-                <div className="flex items-center space-x-2">
-                    <img
-                        src={logo}
-                        alt="Logo"
-                        className="w-10 h-10 rounded-xl"
-                    />
-                    <span className="text-xl font-bold">Sports Club</span>
-                </div>
+                <Logo />
 
                 {/* Desktop Links */}
                 <ul className="hidden md:flex space-x-6">
-                    <li className="hover:text-gray-300 cursor-pointer">Home</li>
-                    <li className="hover:text-gray-300 cursor-pointer">Courts</li>
-
+                    <NavLink to='/'><li className="hover:text-gray-300 cursor-pointer">Home</li></NavLink>
+                    <NavLink to='/courts'><li className="hover:text-gray-300 cursor-pointer">Courts</li></NavLink>
                 </ul>
 
 
@@ -36,12 +39,12 @@ const Navbar = () => {
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                                         <li><a>Item 1</a></li>
                                         <li><a>dashboard</a></li>
-                                        <li><a>log out</a></li>
+                                        <li onClick={handleLogOut}><a>log out</a></li>
                                     </ul>
                                 </div>
                             </>
                             :
-                            <><button className="btn btn-secondary">button</button></>
+                            <><NavLink to='/login'><button className="btn btn-secondary">log In</button></NavLink></>
                     }
                     {/* Mobile Hamburger */}
                     <div className="md:hidden">
@@ -81,8 +84,8 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isOpen && (
                 <ul className="md:hidden mt-4 space-y-2">
-                    <li className="hover:text-gray-300 cursor-pointer">Home</li>
-                    <li className="hover:text-gray-300 cursor-pointer">Courts</li>
+                    <NavLink to='/'><li className="hover:text-gray-300 cursor-pointer">Home</li></NavLink>
+                    <NavLink to='/courts'><li className="hover:text-gray-300 cursor-pointer">Courts</li></NavLink>
                 </ul>
             )}
 
