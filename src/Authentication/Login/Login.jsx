@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GoogleSignIn from "../../Shared/GoogleSignIn/GoogleSignIn";
 
 const Login = () => {
   return (
@@ -38,16 +39,13 @@ const Login = () => {
             />
           </div>
 
-          {/* Remember Me + Forgot Password */}
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" className="w-4 h-4" />
-              Remember Me
-            </label>
-            <a href="#" className="text-indigo-600 hover:underline">
-              Forgot Password?
-            </a>
-          </div>
+          {/* Register Link */}
+          <p className="text-center text-gray-600 mt-4">
+            Don’t have an account?{" "}
+            <Link to='/register' className="text-indigo-600 hover:underline">
+              Register
+            </Link>
+          </p>
 
           {/* Submit Button */}
           <button
@@ -56,15 +54,8 @@ const Login = () => {
           >
             Login
           </button>
-
-          {/* Register Link */}
-          <p className="text-center text-gray-600 mt-4">
-            Don’t have an account?{" "}
-            <Link to='/register' className="text-indigo-600 hover:underline">
-              Register
-            </Link>
-          </p>
         </form>
+        <GoogleSignIn></GoogleSignIn>
       </div>
     </section>
   );
