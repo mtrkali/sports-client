@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import { useLocation } from "react-router-dom";
+import BookingDetails from "../BookingDetailsPage/BookingDetails";
+import Swal from "sweetalert2";
 
 const CourtsPage = () => {
+  const {user} = useAuth();
+  const [selectedCourt, setSelectedCourt] = useState(null);
+
+ 
+
+  const handleBooking =(court) =>{
+    if(!user){
+      Swal.fire('login Required!','please Select please login','warning')
+      return;
+    }
+
+    //set for modal
+    setSelectedCourt(court)
+  }
+
   const courts = [
     {
       id: 1,
@@ -58,7 +77,9 @@ const CourtsPage = () => {
                 <label className="block text-sm font-medium text-gray-600 mb-1">
                   Choose Slot
                 </label>
-                <select className="w-full border border-gray-300 text-black rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <select
+                 className="w-full border border-gray-300 text-black rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                  <option value=''>Select a slot</option>
                   <option>8:00 AM - 9:00 AM</option>
                   <option>9:00 AM - 10:00 AM</option>
                   <option>4:00 PM - 5:00 PM</option>
@@ -72,13 +93,18 @@ const CourtsPage = () => {
               </p>
 
               {/* Book Now Button (Static for now) */}
-              <button className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
+              <button onClick={()=>handleBooking(court)} className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
                 Book Now
               </button>
             </div>
           </div>
         ))}
       </div>
+      {
+        selectedCourt && (
+          <BookingDetails court = {selectedCourt} setSelectedCourt={setSelectedCourt} />
+        )
+      }
     </section>
   );
 };

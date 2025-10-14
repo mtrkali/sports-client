@@ -5,6 +5,7 @@ import CourtsPage from "../Pages/CourtsPage/CourtsPage";
 import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
+import BookingDetails from "../Pages/BookingDetailsPage/BookingDetails";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
             {
                 path: 'courts',
                 Component: CourtsPage
+            },
+            {
+                path: 'bookingDetails',
+                Component: BookingDetails
             }
         ]
     },
