@@ -6,6 +6,7 @@ import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 import BookingDetails from "../Pages/BookingDetailsPage/BookingDetails";
+import PrivateRoute from '../routes/priateRoute/PrivateRoute.jsx'
 
 export const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'bookingDetails',
-                Component: BookingDetails
+                element: <PrivateRoute><BookingDetails></BookingDetails></PrivateRoute>
             }
         ]
     },

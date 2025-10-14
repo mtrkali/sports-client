@@ -25,21 +25,21 @@ const CourtsPage = () => {
       id: 1,
       name: "Tennis Court A",
       type: "Tennis",
-      price: "৳800 / session",
+      price: 800,
       image: "https://i.ibb.co.com/C3v4DdXF/foods1.jpg",
     },
     {
       id: 2,
       name: "Badminton Court B",
       type: "Badminton",
-      price: "৳500 / session",
+      price: 500,
       image: "https://i.ibb.co.com/C3v4DdXF/foods1.jpg",
     },
     {
       id: 3,
       name: "Squash Court C",
       type: "Squash",
-      price: "৳700 / session",
+      price: 700,
       image: "https://i.ibb.co.com/C3v4DdXF/foods1.jpg",
     },
   ];
@@ -88,8 +88,8 @@ const CourtsPage = () => {
               </div>
 
               {/* Price */}
-              <p className="text-lg font-semibold text-indigo-600 mb-4">
-                {court.price}
+              <p className="text-lg font-semibold text-gray-500 mb-4">
+                Price per slot: {court.price} TK
               </p>
 
               {/* Book Now Button (Static for now) */}
