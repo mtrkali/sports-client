@@ -6,25 +6,28 @@ import AuthLayout from "../Layouts/AuthLayout/AuthLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 import BookingDetails from "../Pages/BookingDetailsPage/BookingDetails";
-import PrivateRoute from '../routes/priateRoute/PrivateRoute.jsx'
+import PrivateRoute from '../routes/priateRoute/PrivateRoute'
 
 export const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayout,
-        children:[
+        children: [
             {
-                index:true,
+                index: true,
                 Component: Home,
             },
             {
                 path: 'courts',
-                Component: CourtsPage
+                element: <CourtsPage></CourtsPage>,
+                children: [
+                    {
+                        path: 'bookingDetails/:id',
+                        element: <PrivateRoute><BookingDetails modal = {true}></BookingDetails></PrivateRoute>
+                    }
+                ]
             },
-            {
-                path: 'bookingDetails',
-                element: <PrivateRoute><BookingDetails></BookingDetails></PrivateRoute>
-            }
+
         ]
     },
     {

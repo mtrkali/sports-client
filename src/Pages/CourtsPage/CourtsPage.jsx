@@ -1,48 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import BookingDetails from "../BookingDetailsPage/BookingDetails";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const CourtsPage = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [selectedCourt, setSelectedCourt] = useState(null);
+  const [courts, setCourts] = useState([]);
+  const navigate = useNavigate();
 
- 
 
-  const handleBooking =(court) =>{
-    if(!user){
-      Swal.fire('login Required!','please Select please login','warning')
-      return;
-    }
+useEffect(()=>{
+  axios.get('/data/courts.json')
+  .then((res) =>setCourts(res.data))
+  .catch((error)=>console.error('error laoding courts',error))
+},[])
 
+
+  const handleBooking = (id) => {
     //set for modal
-    setSelectedCourt(court)
+    navigate(`bookingDetails/${id}`)
   }
 
-  const courts = [
-    {
-      id: 1,
-      name: "Tennis Court A",
-      type: "Tennis",
-      price: 800,
-      image: "https://i.ibb.co.com/C3v4DdXF/foods1.jpg",
-    },
-    {
-      id: 2,
-      name: "Badminton Court B",
-      type: "Badminton",
-      price: 500,
-      image: "https://i.ibb.co.com/C3v4DdXF/foods1.jpg",
-    },
-    {
-      id: 3,
-      name: "Squash Court C",
-      type: "Squash",
-      price: 700,
-      image: "https://i.ibb.co.com/C3v4DdXF/foods1.jpg",
-    },
-  ];
+  
 
   return (
     <section className="py-16 px-6 md:px-20 bg-gray-50 my-5 rounded-lg">
@@ -78,7 +60,7 @@ const CourtsPage = () => {
                   Choose Slot
                 </label>
                 <select
-                 className="w-full border border-gray-300 text-black rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                  className="w-full border border-gray-300 text-black rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                   <option value=''>Select a slot</option>
                   <option>8:00 AM - 9:00 AM</option>
                   <option>9:00 AM - 10:00 AM</option>
@@ -93,7 +75,7 @@ const CourtsPage = () => {
               </p>
 
               {/* Book Now Button (Static for now) */}
-              <button onClick={()=>handleBooking(court)} className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
+              <button onClick={() => handleBooking(court.id)} className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
                 Book Now
               </button>
             </div>
@@ -101,9 +83,7 @@ const CourtsPage = () => {
         ))}
       </div>
       {
-        selectedCourt && (
-          <BookingDetails court = {selectedCourt} setSelectedCourt={setSelectedCourt} />
-        )
+        <Outlet></Outlet>
       }
     </section>
   );

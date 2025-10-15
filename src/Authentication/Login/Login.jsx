@@ -1,11 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../Shared/GoogleSignIn/GoogleSignIn";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
   const {logInUser} = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state || '/';
   const {register, handleSubmit, formState:{errors}} = useForm()
 
   const onSubmit = data  =>{
@@ -13,6 +16,7 @@ const Login = () => {
     .then((result)=>{
       const user = result.user
       console.log('user in log in user function', user)
+      navigate(from);
     })
     .catch(err =>{
       console.error('error in logInUser function ', err)
@@ -75,7 +79,7 @@ const Login = () => {
             Login
           </button>
         </form>
-        <GoogleSignIn></GoogleSignIn>
+        <GoogleSignIn from = {from}></GoogleSignIn>
       </div>
     </section>
   );

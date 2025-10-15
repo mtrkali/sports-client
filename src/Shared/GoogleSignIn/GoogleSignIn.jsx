@@ -1,14 +1,17 @@
 import React from 'react';
 import useAuth from '../../Hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-const GoogleSignIn = () => {
+const GoogleSignIn = ({from}) => {
     const {logInWithGoogle} = useAuth();
+    const navigate = useNavigate();
 
     const handleGoogleSignIn = () =>{
         logInWithGoogle()
         .then(async(result)=>{
             const user = result.user;
             console.log('user of google signIn', user)
+            navigate(from);
         })
         .catch(err =>{
             console.error('error in google sign In ', err);

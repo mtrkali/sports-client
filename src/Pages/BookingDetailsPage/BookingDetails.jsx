@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { X } from "lucide-react"; 
+import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-const BookingDetails = ({ court, setSelectedCourt }) => {
+const BookingDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState("")
   const [totalPrice, setTotalPrice] = useState(0);
+  const [court, setCourt] = useState(null);
 
-  
+  useEffect(() => {
+    axios.get('/data/courts.json')
+      .then((res) => {
+        const found = res.data.find((c) => c.id === parseInt(id));
+        setCourt(found)
+      })
+  }, [id])
+  console.log(court);
 
-  const slotOptions = [
-    "08:00 - 09:00",
-    "09:00 - 10:00",
-    "16:00 - 17:00",
-    "18:00 - 19:00",
-  ];
-
-  useEffect(()=>{
-    const total = (selectedSlots.length * court.price).toFixed(2);
-    setTotalPrice(total)
-  },[selectedSlots,court.price])
+  useEffect(() => {
+    if (court) {
+      const total = (selectedSlots.length * court.price).toFixed(2);
+      setTotalPrice(total)
+    }
+  }, [selectedSlots, court])
 
   if (!court) return null;
 
   //handle multi slot section
   const handleSlotChange = (e) => {
     const value = Array.from(e.target.selectedOptions, (option) => option.value)
-    setSelectedSlots(value);
+    setSelectedSlots(value); //here value is an array
   }
 
-  
+
 
   const handleConfirm = () => {
     if (selectedSlots.length === 0 || !selectedDate) {
@@ -49,7 +56,7 @@ const BookingDetails = ({ court, setSelectedCourt }) => {
     }
     console.log('booking data is ', bookingData)
     Swal.fire('Success', 'your booking has been confirmed', 'success')
-    setSelectedCourt(null)
+    navigate(-1);
   }
 
   return (
@@ -69,13 +76,13 @@ const BookingDetails = ({ court, setSelectedCourt }) => {
         >
           {/* Close Button */}
           <button
-            onClick={() => setSelectedCourt(null)}
+            onClick={() => navigate(-1)}
             className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 bg-red-500 p-1 hover:scale-110 transition rounded-sm "
           >
             <X size={22} />
           </button>
 
-         
+
 
           <h2 className="text-2xl font-bold text-gray-800 mb-3">Booking Details</h2>
 
@@ -131,7 +138,7 @@ const BookingDetails = ({ court, setSelectedCourt }) => {
                 onChange={handleSlotChange}
                 className="w-full border rounded-lg px-3 py-2 mt-1 h-24 focus:ring-2 focus:ring-indigo-500 text-gray-700"
               >
-                {slotOptions.map((slot, index) => (
+                {court.slotOptions.map((slot, index) => (
                   <option key={index} value={slot}>
                     {slot}
                   </option>
