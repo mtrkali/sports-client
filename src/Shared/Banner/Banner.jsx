@@ -9,19 +9,19 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const Banner = () => {
     return (
         <div>
-            <Carousel className='rounded-lg' autoPlay={true} infiniteLoop={true} showThumbs={false}>
+            <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false}>
                 <div>
-                <img  src={club} />
-                <p className="legend">Legend 1</p>
-            </div>
-            <div>
-                <img src={court} />
-                <p className="legend">Legend 2</p>
-            </div>
-            <div>
-                <img src={activities} />
-                <p className="legend">Legend 3</p>
-            </div>
+                    <img className='md:h-[550px]' src={club} />
+                    <p className="legend">Our club Activities</p>
+                </div>
+                <div>
+                    <img className='md:h-[550px]' src={court} />
+                    <p className="legend">Our club</p>
+                </div>
+                <div>
+                    <img className='md:h-[550px]' src={activities} />
+                    <p className="legend">Our courts </p>
+                </div>
             </Carousel>
         </div>
     );

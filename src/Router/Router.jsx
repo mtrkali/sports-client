@@ -7,6 +7,8 @@ import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 import BookingDetails from "../Pages/BookingDetailsPage/BookingDetails";
 import PrivateRoute from '../routes/priateRoute/PrivateRoute'
+import DashBoardLayout from "../Layouts/DashBoardLayout/DashBoardLayout";
+import MyProfile from "../DashBoard/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +43,16 @@ export const router = createBrowserRouter([
             {
                 path: 'register',
                 Component: Register,
+            }
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
+        children: [
+            {
+                index: true,
+                Component: MyProfile,
             }
         ]
     }

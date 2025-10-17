@@ -8,7 +8,7 @@ const Login = () => {
   const {logInUser} = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state || '/';
+  const from =location.state? location.state : '/';
   const {register, handleSubmit, formState:{errors}} = useForm()
 
   const onSubmit = data  =>{

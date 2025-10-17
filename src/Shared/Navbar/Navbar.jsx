@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import logo from '../../assets/logo.png'
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
-import { AuthContext } from "../../Contexts/AuthContext/AuthContext";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const isLoggedIn = false; // change to true to show Profile
 
@@ -35,10 +35,10 @@ const Navbar = () => {
                         user ?
                             <>
                                 <div className="dropdown dropdown-bottom dropdown-end">
-                                    <div tabIndex={0} role="button" className=""> <img src={logo} className="h-8 w-8 rounded-full" alt="" /> </div>
+                                    <div tabIndex={0} role="button" className=""> <img src={user?.photoURL || logo} className="h-8 w-8 rounded-full" alt="" /> </div>
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                                        <li><a>Item 1</a></li>
-                                        <li><a>dashboard</a></li>
+                                        <li><a>userName: {user?.displayName}</a></li>
+                                        <li><NavLink to='/dashboard'>DashBoard</NavLink></li>
                                         <li onClick={handleLogOut}><a>log out</a></li>
                                     </ul>
                                 </div>

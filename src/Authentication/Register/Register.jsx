@@ -1,34 +1,67 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import GoogleSignIn from "../../Shared/GoogleSignIn/GoogleSignIn";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosInstance from "../../Hooks/useAxiosInstance";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const {createUser} = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { createUser, updateProfileUser } = useAuth();
+  const axiosInstance = useAxiosInstance();
+  const from = location.state || '/'
+  const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState('');
 
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     console.log(data);
     createUser(data.email, data.password)
-    .then((result)=>{
-      console.log('user in registration form', result.user);
-    })
-    .catch(error => {
-      console.error('error on create user function', error);
-    })
+      .then(async(result) => {
+        const user = result.user;
+        
+        //send data to the db(mongodb);
+        const userInfo = {
+          email: user.email,
+          role: 'user',
+          last_signIn: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+        }
+
+        const res = await axiosInstance.post('/users', userInfo)
+        console.log('user post data in register page', res.data)
+        if(res.data.insertedId){
+          Swal.fire('Success', 'user successfully created', 'success')
+          navigate(from)
+        }
+
+        //updateProfile in the firebase--
+        const userProfile = {
+          displayName: data.name,
+          photoURL: profilePic,
+        }
+        updateProfileUser(userProfile)
+        .then(()=> console.log('updated user Profile pic'))
+        .catch(err => console.error('error in update profile',err))
+      })
+      .catch(error => {
+        console.error('error on create user function in register page', error);
+      })
   }
 
-  // const handleImgUpload = async(e) =>{
-  //   const image = e.target.file[0]
-  //   const formData = new FormData();
-  //   formData.append('image', image);
+  const handleImgUpload = async(e) =>{
+    const image = e.target.files[0]
 
-  //   const imageUploadURL  = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`
-  //   const res = await axios.post(imageUploadURL,formData);
+    const formData = new FormData();
+    formData.append('image', image);
 
-  //   setProfilePic(res.data.data.url);
-  // }
+    const imageUploadURL  = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`
+    const res = await axios.post(imageUploadURL,formData);
+
+    setProfilePic(res.data.data.url);
+  }
 
   return (
     <section className="flex justify-center items-center min-h-screen bg-gray-50 px-6 md:px-20 py-12 rounded-lg">
@@ -77,7 +110,7 @@ const Register = () => {
             </label>
             <input
               type="tel"
-              {...register('phone',{required:  true})}
+              {...register('phone', { required: true })}
               name="phone"
               placeholder="Enter your phone number"
               className="w-full text-black border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -85,13 +118,13 @@ const Register = () => {
             {errors.phone?.type === 'required' && <p className="text-red-500">phone is reqired</p>}
           </div>
 
-          {/* Membership Type */}
+          {/*user Picture*/}
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               you profile picture
             </label>
             <input type="file"
-              // onchange={handleImgUpload}
+              onChange={handleImgUpload}
               className="input w-full bg-gray-50 border-gray-300 text-black focus:outline-none focus:ring-2 focus:to-blue-500 px-4 py-2 border rounded-lg"
               name="profiePic"
               placeholder="chose a photo for profile pic" />
@@ -104,7 +137,7 @@ const Register = () => {
             </label>
             <input
               type="password"
-              {...register('password', {required: true, minLength: 6})}
+              {...register('password', { required: true, minLength: 6 })}
               name="password"
               placeholder="Enter your password"
               className="w-full text-black border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"

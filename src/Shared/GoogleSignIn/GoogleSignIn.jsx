@@ -1,17 +1,32 @@
 import React from 'react';
 import useAuth from '../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import useAxiosInstance from '../../Hooks/useAxiosInstance';
+import Swal from 'sweetalert2';
 
 const GoogleSignIn = ({from}) => {
     const {logInWithGoogle} = useAuth();
     const navigate = useNavigate();
+    const axiosInstance = useAxiosInstance();
 
     const handleGoogleSignIn = () =>{
         logInWithGoogle()
         .then(async(result)=>{
             const user = result.user;
-            console.log('user of google signIn', user)
-            navigate(from);
+            
+            const userInfo = {
+                email: user.email,
+                role: 'user',
+                last_signIn: new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+            }
+
+            const res = await axiosInstance.post('/users', userInfo)
+            if(res.data.insertedId){
+                Swal.fire('Success','user successfully created!!','success')
+                navigate(from);
+            }
+            
         })
         .catch(err =>{
             console.error('error in google sign In ', err);

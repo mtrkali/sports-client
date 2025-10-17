@@ -4,8 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const BookingDetails = () => {
+  const {user} = useAuth();
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const navigate = useNavigate();
   const [selectedSlots, setSelectedSlots] = useState([]);
@@ -20,7 +24,6 @@ const BookingDetails = () => {
         setCourt(found)
       })
   }, [id])
-  console.log(court);
 
   useEffect(() => {
     if (court) {
@@ -46,17 +49,25 @@ const BookingDetails = () => {
     }
 
     const bookingData = {
+      bookingId: `BK-${new Date()}- ${Math.floor(Math.random() * 1000)}`,
       courtId: court.id,
       courtName: court.name,
       courtType: court.type,
+      status:'pending',
       selectedDate,
       selectedSlots,
+      requestBy:user?.email,
       totalPrice: totalPrice,
       createdAt: new Date(),
     }
-    console.log('booking data is ', bookingData)
-    Swal.fire('Success', 'your booking has been confirmed', 'success')
-    navigate(-1);
+    axiosSecure.post('/booking', bookingData)
+    .then((res) =>{
+      if(res.data.insertedId){
+        console.log(res.data);
+        Swal.fire('Success', 'your booking has been confirmed', 'success')
+      }
+      navigate(-1);
+    })
   }
 
   return (
