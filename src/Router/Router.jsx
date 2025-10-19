@@ -9,6 +9,8 @@ import BookingDetails from "../Pages/BookingDetailsPage/BookingDetails";
 import PrivateRoute from '../routes/priateRoute/PrivateRoute'
 import DashBoardLayout from "../Layouts/DashBoardLayout/DashBoardLayout";
 import MyProfile from "../DashBoard/MyProfile/MyProfile";
+import PendingBookings from "../DashBoard/PendingBooking/PendingBooking";
+import Announcements from "../DashBoard/Announcements/Announcements";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +55,14 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: MyProfile,
+            },
+            {
+                path: 'pendingBooking',
+                Component: PendingBookings,
+            },
+            {
+                path: 'announcements',
+                Component: Announcements,
             }
         ]
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
@@ -53,10 +53,11 @@ const BookingDetails = () => {
       courtId: court.id,
       courtName: court.name,
       courtType: court.type,
-      status:'pending',
+      status: 'pending',
+      payment: 'unpaid',
       selectedDate,
       selectedSlots,
-      requestBy:user?.email,
+      requestBy: user?.email,
       totalPrice: totalPrice,
       createdAt: new Date(),
     }

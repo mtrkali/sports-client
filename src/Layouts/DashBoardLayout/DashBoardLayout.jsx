@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../../Shared/logo/Logo'
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaHome } from 'react-icons/fa';
+import { FaBullhorn, FaHome, FaTasks, FaUser } from 'react-icons/fa';
 
 const DashBoardLayout = () => {
     return (
@@ -42,8 +42,23 @@ const DashBoardLayout = () => {
                     {/* Sidebar content here */}
                     <Logo></Logo>
                     <li>
+                        <NavLink to="/">
+                            <FaHome /> Home
+                        </NavLink>
+                    </li>
+                    <li>
                         <NavLink to="/dashboard">
-                            my profile
+                            <FaUser /> my profile
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/pendingBooking">
+                           <FaTasks /> pending booking
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/announcements">
+                           <FaBullhorn />announcements
                         </NavLink>
                     </li>
                 </ul>
