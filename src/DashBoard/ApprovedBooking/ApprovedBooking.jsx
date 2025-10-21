@@ -1,4 +1,4 @@
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -9,7 +9,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 const ApprovedBookings = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
-    const queryClient = new QueryClient();
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const { data: approvedBookings = [], isLoading, refetch } = useQuery({
@@ -65,6 +65,11 @@ const ApprovedBookings = () => {
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
                 ✅ Approved Bookings
             </h2>
+            {approvedBookings.length === 0 &&
+            <>
+                <h1 className="text-3xl p-20 border rounded-lg">there is no approved booking yet!!</h1>
+            </>
+            }
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {approvedBookings.map((booking) => (

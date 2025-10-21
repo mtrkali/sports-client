@@ -58,9 +58,10 @@ const BookingDetails = () => {
       selectedDate,
       selectedSlots,
       requestBy: user?.email,
-      totalPrice: totalPrice,
+      totalPrice: Number(totalPrice),
       createdAt: new Date(),
     }
+    
     axiosSecure.post('/booking', bookingData)
     .then((res) =>{
       if(res.data.insertedId){
