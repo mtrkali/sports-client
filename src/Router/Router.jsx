@@ -11,6 +11,9 @@ import DashBoardLayout from "../Layouts/DashBoardLayout/DashBoardLayout";
 import MyProfile from "../DashBoard/MyProfile/MyProfile";
 import PendingBookings from "../DashBoard/PendingBooking/PendingBooking";
 import Announcements from "../DashBoard/Announcements/Announcements";
+import ApprovedBooking from "../DashBoard/ApprovedBooking/ApprovedBooking";
+import PaymentPage from "../DashBoard/ApprovedBooking/PaymentPage";
+import ManageCoupons from "../DashBoard/ManageCoupons/ManageCoupons";
 
 export const router = createBrowserRouter([
     {
@@ -27,7 +30,7 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: 'bookingDetails/:id',
-                        element: <PrivateRoute><BookingDetails modal = {true}></BookingDetails></PrivateRoute>
+                        element: <PrivateRoute><BookingDetails modal={true}></BookingDetails></PrivateRoute>
                     }
                 ]
             },
@@ -63,6 +66,20 @@ export const router = createBrowserRouter([
             {
                 path: 'announcements',
                 Component: Announcements,
+            },
+            {
+                path: 'approvedBooking',
+                Component: ApprovedBooking,
+                children: [
+                    {
+                        path: 'paymentPage/:id',
+                        Component: PaymentPage,
+                    }
+                ]
+            },
+            {
+                path: 'manageCoupons',
+                Component: ManageCoupons,
             }
         ]
     }

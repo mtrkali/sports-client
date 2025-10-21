@@ -1,7 +1,8 @@
 import React from 'react';
 import Logo from '../../Shared/logo/Logo'
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaBullhorn, FaHome, FaTasks, FaUser } from 'react-icons/fa';
+import { FaBullhorn, FaCheckCircle, FaHome, FaTags, FaTasks, FaUser } from 'react-icons/fa';
+
 
 const DashBoardLayout = () => {
     return (
@@ -59,6 +60,16 @@ const DashBoardLayout = () => {
                     <li>
                         <NavLink to="/dashboard/announcements">
                            <FaBullhorn />announcements
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/approvedBooking">
+                           <FaCheckCircle />approved Booking
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/manageCoupons">
+                          <FaTags /> manageCoupons
                         </NavLink>
                     </li>
                 </ul>

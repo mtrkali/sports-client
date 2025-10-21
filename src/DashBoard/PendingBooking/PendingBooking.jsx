@@ -13,7 +13,7 @@ const PendingBookings = () => {
     const { data: bookings = [], refetch, isLoading, } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/booking?email=${user.email}`)
+            const res = await axiosSecure.get(`/booking?email=${user.email}&status=pending`)
             return res.data;
         }
     })
