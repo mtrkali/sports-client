@@ -47,26 +47,27 @@ const PaymentPage = () => {
     const { register, handleSubmit } = useForm();
     const queryClient = useQueryClient();
     const updateMutation = useMutation({
-        mutationFn: async()=>{
-            const res = await axiosSecure.patch(`/bookings/${booking._id}`,{status: 'paid', paidAt: new Date()})
+        mutationFn: async({price})=>{
+            const res = await axiosSecure.patch(`/bookings/${booking._id}`,{status: 'confirmed', payment: 'paid', paidAt: new Date(), totalpaid: Number(price)})
             return res.data;
         },
         onSuccess: ()=>{
             queryClient.invalidateQueries(['booking']),
              Swal.fire("Success", "Payment confirmed!", "success");
+             navigate(-1)
+             refetch();
         }
     })
 
      const onSubmit = async(data) => {
-    updateMutation.mutate()
-    navigate(-1)
+    updateMutation.mutate({price:finalPrice})
+    
      };
 
     const handleApplyCoupon = () => {
         if (!booking?.totalPrice) return;
 
         const found = coupons.find(coup => coup.couponCode === coupon);
-        console.log(found.couponCode, coupon);
 
         if(found){
             const newPrice = booking.totalPrice * (1-found.discount/100)
@@ -181,7 +182,7 @@ const PaymentPage = () => {
                             type="text"
                             readOnly
                             value={`${finalPrice.toFixed(2)} TK`}
-                            {...register("price")}
+                           
                             className="w-full border border-gray-300 bg-gray-100 rounded-lg px-3 py-2 focus:outline-none"
                         />
                     </div>
