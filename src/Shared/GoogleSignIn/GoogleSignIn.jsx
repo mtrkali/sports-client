@@ -15,18 +15,22 @@ const GoogleSignIn = ({from}) => {
             const user = result.user;
             
             const userInfo = {
+                name:user?.displayName,
                 email: user.email,
                 role: 'user',
                 last_signIn: new Date().toISOString(),
                 createdAt: new Date().toISOString(),
             }
 
-            const res = await axiosInstance.post('/users', userInfo)
-            if(res.data.insertedId){
-                Swal.fire('Success','user successfully created!!','success')
-                navigate(from);
+            const res = await axiosInstance.post('/users/google', userInfo)
+            if(res.data.upsertedId){
+                Swal.fire('Success','user successfully created!!','success')   
+            }else if (res.data.modifiedCount){
+                Swal.fire('Success', 'Welcome back Last signIn updated', 'success')
+            }else{
+                Swal.fire('Info','no change made info','info')
             }
-            
+            navigate(from);
         })
         .catch(err =>{
             console.error('error in google sign In ', err);

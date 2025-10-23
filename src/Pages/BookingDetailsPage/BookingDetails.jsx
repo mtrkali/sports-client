@@ -68,7 +68,7 @@ const BookingDetails = () => {
         console.log(res.data);
         Swal.fire('Success', 'your booking has been confirmed', 'success')
       }
-      navigate(-1);
+      navigate('/courts');
     })
   }
 

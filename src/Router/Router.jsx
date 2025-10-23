@@ -15,6 +15,9 @@ import ApprovedBooking from "../DashBoard/ApprovedBooking/ApprovedBooking";
 import PaymentPage from "../DashBoard/ApprovedBooking/PaymentPage";
 import ManageCoupons from "../DashBoard/ManageCoupons/ManageCoupons";
 import ConfirmedBookings from "../DashBoard/ConfirmedBookings/ConfirmedBookings";
+import PaymentHistory from "../DashBoard/PaymentHistory/PaymentHIstory";
+import ManageBookings from "../DashBoard/ManageBookings/ManageBookings";
+import ManageMembers from "../DashBoard/ManageMembers/ManageMembers";
 
 export const router = createBrowserRouter([
     {
@@ -85,7 +88,19 @@ export const router = createBrowserRouter([
             {
                 path: 'confirmedBookings',
                 Component: ConfirmedBookings,
-            }
+            },
+            {
+                path: 'paymentHistory',
+                Component: PaymentHistory,
+            },
+            {
+                path: 'manageBookings',
+                Component: ManageBookings,
+            },
+            {
+                path: 'manageMembers',
+                Component: ManageMembers,
+            },
         ]
     }
 ])

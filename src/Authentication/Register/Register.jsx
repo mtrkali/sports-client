@@ -24,6 +24,7 @@ const Register = () => {
         
         //send data to the db(mongodb);
         const userInfo = {
+          name: data.name,
           email: user.email,
           role: 'user',
           last_signIn: new Date().toISOString(),

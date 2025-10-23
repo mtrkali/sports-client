@@ -21,37 +21,37 @@ const ApprovedBookings = () => {
     })
 
     const deleteMutation = useMutation({
-        mutationFn: async(id)=>{
+        mutationFn: async (id) => {
             const res = await axiosSecure.delete(`/booking/${id}`)
             return res.data;
         },
-        onSuccess: () =>{
+        onSuccess: () => {
             queryClient.invalidateQueries(['approvedBookings'])
-            Swal.fire('Success','successfuly canceled booking','success')
+            Swal.fire('Success', 'successfuly canceled booking', 'success')
             refetch();
         },
-        onError: ()=>{
-            Swal.fire('Error!!','Failed to delete booking','error')
+        onError: () => {
+            Swal.fire('Error!!', 'Failed to delete booking', 'error')
         }
     })
 
-    const handleCancel = (id)=>{
+    const handleCancel = (id) => {
         Swal.fire({
-             title: "Are you sure?",
+            title: "Are you sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
             confirmButtonText: "Yes, delete it!",
-        }).then(result =>{
-            if(result.isConfirmed){
+        }).then(result => {
+            if (result.isConfirmed) {
                 deleteMutation.mutate(id);
             }
         })
     }
 
-    const handlePaymentNavigate = (id)=>{
+    const handlePaymentNavigate = (id) => {
         navigate(`paymentPage/${id}`)
     }
 
@@ -66,9 +66,9 @@ const ApprovedBookings = () => {
                 ✅ Approved Bookings
             </h2>
             {approvedBookings.length === 0 &&
-            <>
-                <h1 className="text-3xl p-20 border rounded-lg">there is no approved booking yet!!</h1>
-            </>
+                <>
+                    <h1 className="text-3xl p-20 border rounded-lg">there is no approved booking yet!!</h1>
+                </>
             }
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -105,12 +105,12 @@ const ApprovedBookings = () => {
 
                         <div className="flex flex-col sm:flex-row gap-3 mt-3">
                             {/* 🔹 Payment Button (redirect later) */}
-                            <button onClick={()=>handlePaymentNavigate(booking._id)} className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition-all">
+                            <button onClick={() => handlePaymentNavigate(booking._id)} className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition-all">
                                 Pay Now
                             </button>
 
                             {/* 🔹 Cancel Button */}
-                            <button onClick={()=>handleCancel(booking._id)} className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold transition-all">
+                            <button onClick={() => handleCancel(booking._id)} className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold transition-all">
                                 Cancel
                             </button>
                         </div>

@@ -48,13 +48,18 @@ const PaymentPage = () => {
     const queryClient = useQueryClient();
     const updateMutation = useMutation({
         mutationFn: async({price})=>{
-            const res = await axiosSecure.patch(`/bookings/${booking._id}`,{status: 'confirmed', payment: 'paid', paidAt: new Date(), totalpaid: Number(price)})
+            const res = await axiosSecure.patch(`/bookings/${booking._id}`,{
+                status: 'confirmed',
+                payment: 'paid',
+                paidAt: new Date(),
+                usedCoupon: coupon? coupon:'not used',
+                totalpaid: Number(price),})
             return res.data;
         },
         onSuccess: ()=>{
-            queryClient.invalidateQueries(['booking']),
+            queryClient.invalidateQueries(['booking']);
              Swal.fire("Success", "Payment confirmed!", "success");
-             navigate(-1)
+             navigate(-1);
              refetch();
         }
     })
