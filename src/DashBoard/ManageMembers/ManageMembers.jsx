@@ -7,11 +7,12 @@ import Swal from "sweetalert2";
 
 const ManageMembers = () => {
     const axiosSecure = useAxiosSecure();
+    const [searchQuery, setSearchQuery] = useState("");
 
     const { data: members = [],refetch } = useQuery({
-        queryKey: ['members'],
+        queryKey: ['members', searchQuery],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users/member')
+            const res = await axiosSecure.get(`/users/member?search=${searchQuery}`)
             return res.data
         }
     })
@@ -46,7 +47,7 @@ const ManageMembers = () => {
     }
 
 
-    const [searchQuery, setSearchQuery] = useState("");
+    
 
 
 
@@ -64,7 +65,7 @@ const ManageMembers = () => {
                     placeholder="Search by member name..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="flex-1 border text-black border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
             </div>
 
