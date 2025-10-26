@@ -102,6 +102,11 @@ const DashBoardLayout = () => {
                           <FaTableTennis /> manage courts
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/manageConfirmedBookings">
+                          <FaCheckCircle /> manage confirmed Booking
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>
