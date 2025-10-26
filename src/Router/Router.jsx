@@ -19,6 +19,7 @@ import PaymentHistory from "../DashBoard/PaymentHistory/PaymentHIstory";
 import ManageBookings from "../DashBoard/ManageBookings/ManageBookings";
 import ManageMembers from "../DashBoard/ManageMembers/ManageMembers";
 import AllUsers from "../DashBoard/AllUser/AllUser";
+import ManageCourts from "../DashBoard/ManageCourts/ManageCourts";
 
 export const router = createBrowserRouter([
     {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
             {
                 path: 'allUser',
                 Component: AllUsers,
+            },
+            {
+                path: 'mangeCourts',
+                Component: ManageCourts,
             },
         ]
     }

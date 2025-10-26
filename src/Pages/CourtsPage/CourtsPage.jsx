@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import BookingDetails from "../BookingDetailsPage/BookingDetails";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const CourtsPage = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [selectedCourt, setSelectedCourt] = useState(null);
-  const [courts, setCourts] = useState([]);
   const navigate = useNavigate();
 
-
-useEffect(()=>{
-  axios.get('/data/courts.json')
-  .then((res) =>setCourts(res.data))
-  .catch((error)=>console.error('error laoding courts',error))
-},[])
+ const {data: courts = []} = useQuery({
+  queryKey: ['courts'],
+  queryFn: async()=>{
+    const res = await axiosSecure.get('/courts')
+    return res.data
+  }
+ })
 
 
   const handleBooking = (id) => {
@@ -37,7 +40,7 @@ useEffect(()=>{
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {courts.map((court) => (
           <div
-            key={court.id}
+            key={court._id}
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform"
           >
             {/* Court Image */}
@@ -75,7 +78,7 @@ useEffect(()=>{
               </p>
 
               {/* Book Now Button (Static for now) */}
-              <button onClick={() => handleBooking(court.id)} className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
+              <button onClick={() => handleBooking(court._id)} className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
                 Book Now
               </button>
             </div>

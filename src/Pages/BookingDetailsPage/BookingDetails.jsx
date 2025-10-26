@@ -3,9 +3,9 @@ import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const BookingDetails = () => {
   const {user} = useAuth();
@@ -15,15 +15,16 @@ const BookingDetails = () => {
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState("")
   const [totalPrice, setTotalPrice] = useState(0);
-  const [court, setCourt] = useState(null);
 
-  useEffect(() => {
-    axios.get('/data/courts.json')
-      .then((res) => {
-        const found = res.data.find((c) => c.id === parseInt(id));
-        setCourt(found)
-      })
-  }, [id])
+  const {data: court = {},isLoading, isError} = useQuery({
+    queryKey: ['court',id],
+    queryFn: async()=>{
+      const res = await axiosSecure.get(`/courts/${id}`)
+      console.log(res.data)
+      return res.data
+    }
+  })
+  
 
   useEffect(() => {
     if (court) {
@@ -72,6 +73,12 @@ const BookingDetails = () => {
     })
   }
 
+  if(isLoading){
+    return <p>Loading ......</p>
+  }
+  if(isError){
+    return <p> Failed to fetch data</p>
+  }
   return (
     <AnimatePresence>
       <motion.div

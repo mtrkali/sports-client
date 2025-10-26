@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import Loading from "../../Shared/Loading/Loading";
 import Swal from "sweetalert2";
 import { Outlet, useNavigate } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ApprovedBookings = () => {
     const { user } = useAuth();
@@ -62,8 +63,8 @@ const ApprovedBookings = () => {
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
-            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-                ✅ Approved Bookings
+            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 flex justify-center items-center gap-2">
+                <FaCheckCircle className="text-green-500" /> Approved Bookings
             </h2>
             {approvedBookings.length === 0 &&
                 <>
