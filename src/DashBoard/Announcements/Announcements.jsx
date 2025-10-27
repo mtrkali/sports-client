@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Loading from "../../Shared/Loading/Loading";
+import { FaBullhorn } from "react-icons/fa";
 
 
 
@@ -19,8 +20,8 @@ const Announcements = () => {
     }
   return (
     <section className="bg-gray-50 min-h-screen px-4 md:px-10 py-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
-        Club Announcements
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10 flex gap-2 justify-center items-center">
+       <FaBullhorn className="text-blue-500" /> Club Announcements
       </h2>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -50,12 +51,12 @@ const Announcements = () => {
               </div>
 
               <div className="text-xs text-gray-500 border-t pt-3 mt-auto bg-base-bg-bse">
-                <p>Announced: {new Date(item.announceDate).toLocaleDateString("en-US", {
+                <p>Announced: {new Date(item.Valid_Till).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric"
                 })}</p>
-                <p> Valid Till: {new Date(item.Valid_Till).toLocaleDateString("en-US", {
+                <p> Valid Till: {new Date(item.announceDate).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric"

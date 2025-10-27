@@ -107,6 +107,11 @@ const DashBoardLayout = () => {
                           <FaCheckCircle /> manage confirmed Booking
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/manageAnnouncements">
+                          < FaBullhorn /> manage announcements
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>
