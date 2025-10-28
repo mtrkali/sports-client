@@ -112,6 +112,11 @@ const DashBoardLayout = () => {
                           < FaBullhorn /> manage announcements
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/adminProfile">
+                          < FaUser /> admin profile
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>

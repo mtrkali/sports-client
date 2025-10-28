@@ -20,7 +20,7 @@ const ManageMembers = () => {
     const queryClient = useQueryClient();
     const updateMutaion = useMutation({
         mutationFn: async (email) => {
-            const res = await axiosSecure.patch(`/users/rejectmember/${email}`, { role: 'user' })
+            const res = await axiosSecure.patch(`/users/rejectmember/${email}`, { role: 'user', removeMemberAt: true})
             return res.data
         },
         onSuccess: () => {

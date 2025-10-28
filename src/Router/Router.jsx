@@ -22,6 +22,7 @@ import AllUsers from "../DashBoard/AllUser/AllUser";
 import ManageCourts from "../DashBoard/ManageCourts/ManageCourts";
 import ManageConfirmedBookings from "../DashBoard/ManageConfirmedBookings/ManageConfirmedBookings ";
 import ManageAnnouncements from "../DashBoard/ManageAnnouncements/ManageAnnouncements";
+import AdminProfile from "../DashBoard/adminProfile/adminProfile";
 
 export const router = createBrowserRouter([
     {
@@ -121,6 +122,10 @@ export const router = createBrowserRouter([
             {
                 path: 'manageAnnouncements',
                 Component: ManageAnnouncements,
+            },
+            {
+                path: 'adminProfile',
+                element: <AdminProfile></AdminProfile>
             }
         ]
     }

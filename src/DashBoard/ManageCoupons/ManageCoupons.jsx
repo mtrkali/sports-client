@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Loading from "../../Shared/Loading/Loading";
+import { FaTags } from "react-icons/fa";
 
 const ManageCoupons = () => {
     const queryClient = useQueryClient();
@@ -106,8 +107,8 @@ const ManageCoupons = () => {
 
     return (
         <div className="p-4 md:p-10 bg-gray-50 min-h-screen">
-            <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
-                🎟️ Manage Coupons
+            <h2 className="text-2xl flex gap-2 justify-center items-center md:text-3xl font-bold text-center text-gray-800 mb-8">
+                <FaTags /> Manage Coupons
             </h2>
 
             {/* Add Coupon Form */}
