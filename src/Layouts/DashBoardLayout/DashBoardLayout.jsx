@@ -2,9 +2,11 @@ import React from 'react';
 import Logo from '../../Shared/logo/Logo'
 import { NavLink, Outlet } from 'react-router-dom';
 import { FaBullhorn, FaCheckCircle, FaHome, FaMoneyCheckAlt, FaRegCheckCircle, FaTableTennis, FaTags, FaTasks, FaUser, FaUserFriends, FaUserTie } from 'react-icons/fa';
+import useUserRole from '../../Hooks/useUserRole';
 
 
 const DashBoardLayout = () => {
+    const { role, roleLoading } = useUserRole();
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -54,69 +56,71 @@ const DashBoardLayout = () => {
                     </li>
                     <li>
                         <NavLink to="/dashboard/pendingBooking">
-                           <FaTasks /> pending booking
+                            <FaTasks /> pending booking
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/announcements">
-                           <FaBullhorn />announcements
+                            <FaBullhorn />announcements
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/approvedBooking">
-                           <FaCheckCircle />approved Booking
+                            <FaCheckCircle />approved Booking
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/manageCoupons">
-                          <FaTags /> manageCoupons
-                        </NavLink>
-                    </li>
+
                     <li>
                         <NavLink to="/dashboard/confirmedBookings">
-                          <FaRegCheckCircle /> cinfirmed bookings
+                            <FaRegCheckCircle /> confirmed bookings
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/paymentHistory">
-                          <FaMoneyCheckAlt /> payment history
+                            <FaMoneyCheckAlt /> payment history
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/manageBookings">
-                          <FaTasks /> manage bookings
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/manageMembers">
-                          <FaUserFriends /> manage member
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/allUser">
-                          <FaUserTie /> all user
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/mangeCourts">
-                          <FaTableTennis /> manage courts
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/manageConfirmedBookings">
-                          <FaCheckCircle /> manage confirmed Booking
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/manageAnnouncements">
-                          < FaBullhorn /> manage announcements
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/adminProfile">
-                          < FaUser /> admin profile
-                        </NavLink>
-                    </li>
+
+
+                    {!roleLoading && role === 'admin' &&
+                        <>
+                            <li>
+                                <NavLink to="/dashboard/manageBookings">
+                                    <FaTasks /> manage bookings
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageMembers">
+                                    <FaUserFriends /> manage member
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/allUser">
+                                    <FaUserTie /> all user
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/mangeCourts">
+                                    <FaTableTennis /> manage courts
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageConfirmedBookings">
+                                    <FaCheckCircle /> manage confirmed Booking
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageAnnouncements">
+                                    < FaBullhorn /> manage announcements
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageCoupons">
+                                    <FaTags /> manageCoupons
+                                </NavLink>
+                            </li>
+                        </>
+                    }
                 </ul>
             </div>
         </div>

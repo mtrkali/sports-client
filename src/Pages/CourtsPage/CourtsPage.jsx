@@ -13,7 +13,7 @@ const CourtsPage = () => {
   const [selectedCourt, setSelectedCourt] = useState(null);
   const navigate = useNavigate();
 
- const {data: courts = []} = useQuery({
+ const {data: courts = [], isLoading} = useQuery({
   queryKey: ['courts'],
   queryFn: async()=>{
     const res = await axiosSecure.get('/courts')

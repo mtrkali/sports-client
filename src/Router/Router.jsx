@@ -8,7 +8,7 @@ import Register from "../Authentication/Register/Register";
 import BookingDetails from "../Pages/BookingDetailsPage/BookingDetails";
 import PrivateRoute from '../routes/priateRoute/PrivateRoute'
 import DashBoardLayout from "../Layouts/DashBoardLayout/DashBoardLayout";
-import MyProfile from "../DashBoard/MyProfile/MyProfile";
+import MyProfile from "../DashBoard/UserProfile/UserProfile";
 import PendingBookings from "../DashBoard/PendingBooking/PendingBooking";
 import Announcements from "../DashBoard/Announcements/Announcements";
 import ApprovedBooking from "../DashBoard/ApprovedBooking/ApprovedBooking";
@@ -23,6 +23,9 @@ import ManageCourts from "../DashBoard/ManageCourts/ManageCourts";
 import ManageConfirmedBookings from "../DashBoard/ManageConfirmedBookings/ManageConfirmedBookings ";
 import ManageAnnouncements from "../DashBoard/ManageAnnouncements/ManageAnnouncements";
 import AdminProfile from "../DashBoard/adminProfile/adminProfile";
+import Forbidden from "../Shared/ForbiddenPage/Forbidden";
+import AdminRoute from "../routes/AdminRoute/AdminRoute";
+import DashBoardHome from "../DashBoard/DashBoardHome/DashBoardHome";
 
 export const router = createBrowserRouter([
     {
@@ -66,7 +69,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: MyProfile,
+                Component: DashBoardHome,
             },
             {
                 path: 'pendingBooking',
@@ -88,7 +91,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'manageCoupons',
-                Component: ManageCoupons,
+                element:<AdminRoute> <ManageCoupons></ManageCoupons> </AdminRoute>,
+            },
+            {
+                path: 'forbidden',
+                Component: Forbidden,
             },
             {
                 path: 'confirmedBookings',
@@ -100,33 +107,29 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'manageBookings',
-                Component: ManageBookings,
+                element: <AdminRoute><ManageBookings></ManageBookings></AdminRoute> ,
             },
             {
                 path: 'manageMembers',
-                Component: ManageMembers,
+                element: <AdminRoute><ManageMembers></ManageMembers></AdminRoute>,
             },
             {
                 path: 'allUser',
-                Component: AllUsers,
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
             },
             {
                 path: 'mangeCourts',
-                Component: ManageCourts,
+                element: <AdminRoute><ManageCourts></ManageCourts></AdminRoute>,
             },
             {
                 path: 'manageConfirmedBookings',
-                Component: ManageConfirmedBookings,
+                element: <AdminRoute><ManageConfirmedBookings></ManageConfirmedBookings></AdminRoute>,
             }
             ,
             {
                 path: 'manageAnnouncements',
-                Component: ManageAnnouncements,
+                element: <AdminRoute><ManageAnnouncements></ManageAnnouncements></AdminRoute>,
             },
-            {
-                path: 'adminProfile',
-                element: <AdminProfile></AdminProfile>
-            }
         ]
     }
 ])
