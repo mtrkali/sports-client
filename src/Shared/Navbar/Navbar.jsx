@@ -19,7 +19,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-gray-800 text-white px-2 md:px-6 lg:px-6 py-4">
+        <nav className="bg-slate-700 text-white px-2 md:px-6 lg:px-6 py-4 border-b-4 border-t-1 border-slate-200 mb-5 rounded-2xl">
             <div className="flex justify-between items-center">
                 <Logo />
 
@@ -34,12 +34,12 @@ const Navbar = () => {
                     {
                         user ?
                             <>
-                                <div className="dropdown dropdown-bottom dropdown-end">
+                                <div className="dropdown dropdown-bottom dropdown-end border-3 border-amber-400 rounded-full p-1">
                                     <div tabIndex={0} role="button" className=""> <img src={user?.photoURL || logo} className="h-8 w-8 rounded-full" alt="" /> </div>
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                                        <li><a>userName: {user?.displayName}</a></li>
-                                        <li><NavLink to='/dashboard'>DashBoard</NavLink></li>
-                                        <li onClick={handleLogOut}><a>log out</a></li>
+                                        <li className="font-semibold"><a>{user?.displayName}</a></li>
+                                        <li className="underline"><NavLink to='/dashboard'>DashBoard</NavLink></li>
+                                        <li className="underline" onClick={handleLogOut}><a>log out</a></li>
                                     </ul>
                                 </div>
                             </>
@@ -47,7 +47,7 @@ const Navbar = () => {
                             <><NavLink to='/login'><button className="btn btn-secondary">log In</button></NavLink></>
                     }
                     {/* Mobile Hamburger */}
-                    <div className="md:hidden">
+                    <div className="md:hidden mt-2">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="focus:outline-none"

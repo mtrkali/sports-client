@@ -68,7 +68,7 @@ const ApprovedBookings = () => {
             </h2>
             {approvedBookings.length === 0 &&
                 <>
-                    <h1 className="text-3xl p-20 border rounded-lg">there is no approved booking yet!!</h1>
+                    <h1 className="text-3xl p-20 border rounded-lg bg-gray-400 text-center">there is no approved booking yet!!</h1>
                 </>
             }
 

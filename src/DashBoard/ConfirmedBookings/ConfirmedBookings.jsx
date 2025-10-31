@@ -91,7 +91,7 @@ const ConfirmedBookings = () => {
 
             {/* Footer */}
             <div className="mt-4 bg-green-100 text-green-700 text-center rounded-lg py-2 font-medium text-sm">
-              ✅ Payment Completed
+               Payment Completed
             </div>
           </div>
         ))}

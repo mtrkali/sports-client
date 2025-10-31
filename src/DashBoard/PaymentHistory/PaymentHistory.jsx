@@ -55,7 +55,7 @@ const PaymentHistory = () => {
                 <td className="px-4 py-3 text-sm">{p.requestBy}</td>
                 <td className="px-4 py-3 text-right">{p.totalPrice}</td>
                 <td className="px-4 py-3 text-right text-green-600 font-medium">
-                  {p.totalpaid}
+                  {p.totalpaid.toFixed(2)}
                 </td>
                 <td className="px-4 py-3 text-green-500">
                   {p.usedCoupon}
