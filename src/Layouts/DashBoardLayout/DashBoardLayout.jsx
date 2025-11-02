@@ -54,32 +54,36 @@ const DashBoardLayout = () => {
                             <FaUser /> my profile
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/pendingBooking">
-                            <FaTasks /> pending booking
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/announcements">
-                            <FaBullhorn />announcements
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/approvedBooking">
-                            <FaCheckCircle />approved Booking
-                        </NavLink>
-                    </li>
+                    {!roleLoading && role === 'user' &&
+                        <>
+                            <li>
+                                <NavLink to="/dashboard/pendingBooking">
+                                    <FaTasks /> pending booking
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/announcements">
+                                    <FaBullhorn />announcements
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/approvedBooking">
+                                    <FaCheckCircle />approved Booking
+                                </NavLink>
+                            </li>
 
-                    <li>
-                        <NavLink to="/dashboard/confirmedBookings">
-                            <FaRegCheckCircle /> confirmed bookings
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/paymentHistory">
-                            <FaMoneyCheckAlt /> payment history
-                        </NavLink>
-                    </li>
+                            <li>
+                                <NavLink to="/dashboard/confirmedBookings">
+                                    <FaRegCheckCircle /> confirmed bookings
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/paymentHistory">
+                                    <FaMoneyCheckAlt /> payment history
+                                </NavLink>
+                            </li>
+                        </>
+                    }
 
 
                     {!roleLoading && role === 'admin' &&

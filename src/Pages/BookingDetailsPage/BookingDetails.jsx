@@ -97,7 +97,7 @@ const BookingDetails = () => {
           {/* Close Button */}
           <button
             onClick={() => navigate(-1)}
-            className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 bg-red-500 p-1 hover:scale-110 transition rounded-sm "
+            className="absolute top-3 right-3 text-black hover:text-gray-800 bg-red-500 p-1 hover:scale-110 transition rounded-sm "
           >
             <X size={22} />
           </button>
@@ -109,7 +109,7 @@ const BookingDetails = () => {
           {/* Read-only Court Info */}
           <div className="space-y-2 text-sm">
             <div>
-              <label className="font-semibold text-gray-500">Court Name:</label>
+              <label className="font-semibold text-black">Court Name:</label>
               <input
                 type="text"
                 value={court.name}
@@ -119,7 +119,7 @@ const BookingDetails = () => {
             </div>
 
             <div>
-              <label className="font-semibold text-gray-500">Court Type:</label>
+              <label className="font-semibold text-black">Court Type:</label>
               <input
                 type="text"
                 value={court.type}
@@ -129,7 +129,7 @@ const BookingDetails = () => {
             </div>
 
             <div>
-              <label className="font-semibold text-gray-500">Price per slot:</label>
+              <label className="font-semibold text-black">Price per slot:</label>
               <input
                 type="text"
                 value={`৳${court.price}`}
@@ -140,18 +140,18 @@ const BookingDetails = () => {
 
             {/* Editable Date */}
             <div>
-              <label className="font-semibold text-gray-500">Select Date:</label>
+              <label className="font-semibold text-black">Select Date:</label>
               <input
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full border rounded-lg px-3 py-1 mt-1 focus:ring-2 focus:ring-indigo-500 text-gray-500"
+                className="w-full border rounded-lg px-3 py-1 mt-1 focus:ring-2 focus:ring-indigo-500 text-black"
               />
             </div>
 
             {/* Multi Select Slots */}
             <div>
-              <label className="font-semibold text-gray-500">Select Slots:</label>
+              <label className="font-semibold text-black">Select Slots:</label>
               <select
                 multiple
                 value={selectedSlots}
@@ -159,12 +159,12 @@ const BookingDetails = () => {
                 className="w-full border rounded-lg px-3 py-2 mt-1 h-24 focus:ring-2 focus:ring-indigo-500 text-gray-700"
               >
                 {court.slotOptions.map((slot, index) => (
-                  <option key={index} value={slot}>
+                  <option key={index} value={slot} className="text-black">
                     {slot}
                   </option>
                 ))}
               </select>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-black mt-1">
                 (Hold Ctrl/Command to select multiple slots)
               </p>
             </div>

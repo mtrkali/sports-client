@@ -7,7 +7,7 @@ const UserProfile = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: userProfiles = {} } = useQuery({
+    const { data: userProfiles = [] } = useQuery({
         queryKey: ['user', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
@@ -16,6 +16,7 @@ const UserProfile = () => {
         }
     })
 
+    console.log(userProfiles)
     const dateFormater = (isoDate) => {
         const formatedDate = new Date(isoDate).toLocaleDateString('en-us', { month: 'long', day: 'numeric', year: 'numeric' })
         return formatedDate;

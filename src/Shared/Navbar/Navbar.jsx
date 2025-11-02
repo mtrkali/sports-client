@@ -7,7 +7,6 @@ import useAuth from "../../Hooks/useAuth";
 const Navbar = () => {
     const { user, logOut } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
-    const isLoggedIn = false; // change to true to show Profile
 
     const handleLogOut = () => {
         logOut()
@@ -19,7 +18,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-slate-700 text-white px-2 md:px-6 lg:px-6 py-4 border-b-4 border-t-1 border-slate-200 mb-5 rounded-2xl">
+        <nav className="bg-slate-700 text-white px-2 md:px-6 lg:px-6 py-2 border-b-4 border-t-1 border-slate-200 mb-1 rounded-2xl">
             <div className="flex justify-between items-center">
                 <Logo />
 

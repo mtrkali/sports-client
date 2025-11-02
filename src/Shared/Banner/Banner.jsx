@@ -23,7 +23,7 @@ const Banner = () => {
             desc: "Easily manage court reservations, match schedules, and training sessions with real-time availability updates and smart notifications.",
         },
         {
-            img: 'https://i.ibb.co.com/qMrSS2XX/activities.jpg',
+            img: 'https://i.ibb.co.com/HJHgb4f/club.jpg',
             title: "Member Management Made Easy",
             desc: "Add, update, or remove members effortlessly. Keep track of attendance, performance, and membership plans with just a few clicks.",
         },

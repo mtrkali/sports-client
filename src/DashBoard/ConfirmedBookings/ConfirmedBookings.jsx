@@ -25,6 +25,11 @@ const ConfirmedBookings = () => {
         Confirmed Bookings
       </h2>
 
+      {
+        confirmedBookings.length === 0 &&
+        <h1 className="bg-slate-300 text-center text-white p-20 rounded-lg text-3xl font-semibold">you have not any confirmed booking yet!!</h1>
+      }
+
       {/* Responsive Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {confirmedBookings.map((booking) => (

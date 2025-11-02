@@ -1,16 +1,45 @@
-# React + Vite
+## Sport Club Management System
+(A full featured web applicataion for managing sports Court, bookings, and membership)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Admin-
+  userEmail: tommm@dom.com;
+  password:  123456;
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## liveSite URL: https://simple-firebase-auth-c3104.web.app.
+## Client Repo : https://github.com/mtrkali/sports-client.
+## Server Repo : https://github.com/mtrkali/sports-server.
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## feature:
+    - Role base access (admin, user, member)
+    - Court Management System.
+    - Smart Booking System.
+    - Admin overview DashBoard.
+    - interaction map integration.
+    - Advanced Search & filter.
+    - Data fetching & Caching optiminzation.
+    - Modern & Animated Ui.
+    - Caurosel & Marquee highlights.
+    - Interaction alert notification.
 
-## Expanding the ESLint configuration
+## Tech Stack
+**Frontend:** React, React Router v7, TailwindCSS, Framer Motion, React Query  
+**Backend:** Node.js, Express.js, MongoDB, Firebase Admin  
+**Tools:** Axios, SweetAlert2, AOS, Leaflet, Lodash, Swiper
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Installation
+
+### clone the project
+ clint side-
+   git clone https://github.com/mtrkali/sports-client
+   cd sports-client
+
+ server side -
+ git clone https://github.com/mtrkali/sports-server.
+ cd sports-server
+
+
+ # install dependencies
+   npm installl

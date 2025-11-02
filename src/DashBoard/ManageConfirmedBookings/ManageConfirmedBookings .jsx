@@ -82,7 +82,7 @@ if(isLoading){
                                         ৳{booking.totalPrice}
                                     </td>
                                     <td className="p-3 text-sm text-green-600 font-medium">
-                                        ৳{booking.totalpaid}
+                                        ৳{(booking.totalpaid).toFixed(2)}
                                     </td>
                                     <td className="p-3 text-sm text-gray-500">
                                         {booking.usedCoupon || "—"}
