@@ -54,7 +54,7 @@ const DashBoardLayout = () => {
                             <FaUser /> my profile
                         </NavLink>
                     </li>
-                    {!roleLoading && role === 'user' &&
+                    {!roleLoading && (role === 'user'|| role === 'member') &&
                         <>
                             <li>
                                 <NavLink to="/dashboard/pendingBooking">

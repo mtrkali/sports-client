@@ -2,9 +2,9 @@ import React from 'react';
 import useUserRole from '../../Hooks/useUserRole';
 import Loading from '../../Shared/Loading/Loading';
 import UserProfile from '../UserProfile/UserProfile';
-import AdminProfile from '../adminProfile/adminProfile';
 import Forbidden from '../../Shared/ForbiddenPage/Forbidden';
 import MemberProfile from '../MemberProfile/MemberProfile';
+import AdminProfile from '../AdminProfile/AdminProfile';
 
 const DashBoardHome = () => {
     const {role, roleLoading} = useUserRole();

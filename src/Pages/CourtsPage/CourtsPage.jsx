@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Outlet, useNavigate } from "react-router-dom";
 import BookingDetails from "../BookingDetailsPage/BookingDetails";
